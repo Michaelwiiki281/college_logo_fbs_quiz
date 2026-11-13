@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cloudflare.com" rel="stylesheet">
+        <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container text-center mt-5" style="max-width: 500px;">
+        <div class="card p-5 shadow">
+            <h1 class="display-6 fw-bold text-primary mb-2">Quiz Finished</h1>
+            <p class="text-muted mb-4">Here are you results!</p>
+
+            <div class="bg-white border rounded p-4 my-4 shadow-sm">
+                <span class="display-3 fw-bold text-success">{{ score }}</span>
+                <span class="text-muted fs-2"> / {{ total }} </span>
+
+                <div class="mt-3 fw-bold text-uppercase tracking-wider fs-5 text-secondary">
+                    {% if score == total %}
+                        PERFECT SCORE! WOW! Gold star!
+                    {% elif score >= (total * 0.7) %}
+                        Nice work! Silver Star!
+                    {% elif score >= (total * 0.5) %}
+                        Good job! Bronze star!
+                    {% else %}
+                        Keep practicing!
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="d-grid gap-2 mt-4">
+                <a href="/" class="btn btn-success btn-lg fw-bold py-3 shadow-sm">Play another round?</a>
+
+            </div>
+            <hr class="my-4">
+            <small class="text-secondary">CS50 Final Project</small>
+        </div>
+
+    </div>
+</body>
+
+</html>

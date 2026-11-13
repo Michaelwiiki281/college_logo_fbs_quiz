@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name = "viewport" content ="width=device-width, initial-scale=1.0">
+        <title>FBS Logo Quiz</title>
+        <link href="https://cloudfare.com" rel="stylesheet">
+        <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+    </head>
+
+    <body class="bg-light">
+        <div class="container text-center mt-5" style="max-width: 500px;">
+            <div class="card p-5 shadow">
+                <div class="d-flex justify-content-between text-muted small fw-bold mb-3">
+                    <span>PROGRESS</span>
+                    <span>QUESTION {{ current_num }} OF {{ total_num }}</span>
+                </div>
+                <div class="progress mb-4" style="height: 8px;">
+                    <div class ="progress-bar bg-success" style="width: {{ current_num / total_num * 100 }}%">
+                    </div>
+                </div>
+                    <h2 class="h5 text-muted text-uppercase fw-bold mb-4">IDENTIFY THIS TEAM</h2>
+
+                    <div class="logo-box my-4 p-3 bg-white rounded border d-flex align-items-center justify-content-center" style="height: 220px;">
+                        <img src="{{ team.logo_url }}" alt="College Football Logo" class="img-fluid" style="max-height: 200px; object-fit: contain;">
+                    </div>
+
+                    <form action="/quiz" method="POST">
+                        <div class="mb-4">
+                            <label for="team-search" class="form-label text-secondary small fw-bold d-none">Your Guess</label>
+                            <input
+                                list="fbs-teams"
+                                name="answer"
+                                id="team-search"
+                                class="form-control form-control-lg text-center"
+                                placeholder="Type or select your team name"
+                                autocomplete="off"
+                                required
+                                autofocus
+                                >
+                            <datalist id="fbs-teams">
+                                {% for row in all_teams %}
+                                    <option value="{{ row.school_name }}">
+                                {% endfor %}
+                            </datalist>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-lg w-100 shadow-sm fw-bold py-3">
+                            Submit Guess
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </body>
+
+    </html>
